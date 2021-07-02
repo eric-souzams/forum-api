@@ -1,4 +1,4 @@
-package com.project.forumapi.model;
+package com.project.forumapi.model.entitys;
 
 import lombok.Data;
 import lombok.Getter;

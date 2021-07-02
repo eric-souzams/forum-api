@@ -1,5 +1,9 @@
-package com.project.forumapi.model;
+package com.project.forumapi.model.entitys;
 
+import com.project.forumapi.model.entitys.Answer;
+import com.project.forumapi.model.entitys.Matter;
+import com.project.forumapi.model.entitys.Person;
+import com.project.forumapi.model.enums.TopicStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
