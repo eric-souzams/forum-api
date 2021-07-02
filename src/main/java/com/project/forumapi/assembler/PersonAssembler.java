@@ -2,7 +2,7 @@ package com.project.forumapi.assembler;
 
 import com.project.forumapi.controller.request.PersonRequest;
 import com.project.forumapi.controller.response.PersonResponse;
-import com.project.forumapi.model.entitys.Person;
+import com.project.forumapi.model.entities.Person;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

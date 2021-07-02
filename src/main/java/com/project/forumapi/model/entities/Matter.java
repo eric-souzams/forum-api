@@ -1,8 +1,6 @@
-package com.project.forumapi.model.entitys;
+package com.project.forumapi.model.entities;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,16 +11,12 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-public class Person {
+public class Matter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    private String email;
-
-    private String password;
 
 }

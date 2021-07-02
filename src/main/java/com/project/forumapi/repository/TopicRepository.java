@@ -1,6 +1,6 @@
 package com.project.forumapi.repository;
 
-import com.project.forumapi.model.entitys.Topic;
+import com.project.forumapi.model.entities.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

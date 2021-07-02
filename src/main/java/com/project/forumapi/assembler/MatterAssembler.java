@@ -1,7 +1,8 @@
 package com.project.forumapi.assembler;
 
+import com.project.forumapi.controller.request.MatterRequest;
 import com.project.forumapi.controller.response.MatterResponse;
-import com.project.forumapi.model.entitys.Matter;
+import com.project.forumapi.model.entities.Matter;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -16,6 +17,13 @@ public class MatterAssembler {
         matterResponse.setName(matter.getName());
 
         return matterResponse;
+    }
+
+    public Matter toEntity(MatterRequest matterRequest) {
+        Matter matter = new Matter();
+        matter.setName(matterRequest.getName());
+
+        return matter;
     }
 
     public List<MatterResponse> toCollectionResponse(List<Matter> matters) {

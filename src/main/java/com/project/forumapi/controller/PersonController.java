@@ -3,7 +3,7 @@ package com.project.forumapi.controller;
 import com.project.forumapi.assembler.PersonAssembler;
 import com.project.forumapi.controller.request.PersonRequest;
 import com.project.forumapi.controller.response.PersonResponse;
-import com.project.forumapi.model.entitys.Person;
+import com.project.forumapi.model.entities.Person;
 import com.project.forumapi.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
