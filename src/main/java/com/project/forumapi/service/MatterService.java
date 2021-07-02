@@ -1,6 +1,6 @@
 package com.project.forumapi.service;
 
-import com.project.forumapi.controller.assembler.MatterAssembler;
+import com.project.forumapi.assembler.MatterAssembler;
 import com.project.forumapi.controller.response.MatterResponse;
 import com.project.forumapi.repository.MatterRepository;
 import lombok.AllArgsConstructor;

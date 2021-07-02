@@ -1,4 +1,4 @@
-package com.project.forumapi.controller.assembler;
+package com.project.forumapi.assembler;
 
 import com.project.forumapi.controller.response.MatterResponse;
 import com.project.forumapi.model.entitys.Matter;
@@ -16,14 +16,6 @@ public class MatterAssembler {
         matterResponse.setName(matter.getName());
 
         return matterResponse;
-    }
-
-    public Matter toEntity(MatterResponse matterResponse) {
-        Matter matter = new Matter();
-        matter.setId(matterResponse.getId());
-        matter.setName(matterResponse.getName());
-
-        return matter;
     }
 
     public List<MatterResponse> toCollectionResponse(List<Matter> matters) {
