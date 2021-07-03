@@ -1,45 +1,38 @@
-package com.project.forumapi.model.entities;
+package com.project.forumapi.controller.response;
 
+import com.project.forumapi.model.entities.Answer;
+import com.project.forumapi.model.entities.Matter;
+import com.project.forumapi.model.entities.Person;
 import com.project.forumapi.model.enums.TopicStatus;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Getter
 @Setter
-@Entity
 @Builder
-public class Topic {
+public class TopicResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
     private String description;
 
-    @Enumerated(EnumType.STRING)
     private TopicStatus status;
 
     private OffsetDateTime createdAt;
 
     private OffsetDateTime endedAt;
 
-    @ManyToOne
-    private Matter matter;
+    private MatterResponse matter;
 
-    @ManyToOne
-    private Person author;
+    private PersonResponse author;
 
-    @OneToMany(mappedBy = "topic")
     private List<Answer> answers = new ArrayList<>();
 
 }

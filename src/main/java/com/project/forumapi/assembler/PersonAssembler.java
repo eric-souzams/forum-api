@@ -22,7 +22,6 @@ public class PersonAssembler {
         personResponse.setId(person.getId());
         personResponse.setName(person.getName());
         personResponse.setEmail(person.getEmail());
-        personResponse.setPassword(person.getPassword());
 
         return personResponse;
     }

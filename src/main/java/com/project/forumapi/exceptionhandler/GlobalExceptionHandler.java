@@ -1,5 +1,7 @@
 package com.project.forumapi.exceptionhandler;
 
+import com.project.forumapi.exception.MatterNotFoundException;
+import com.project.forumapi.exception.PersonNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -44,5 +46,32 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(errorDescription);
     }
 
+    @ExceptionHandler(PersonNotFoundException.class)
+    public ResponseEntity<Object> handlePersonNotFound(PersonNotFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        ErrorDescription errorDescription = ErrorDescription
+                .builder()
+                .status(status.value())
+                .time(OffsetDateTime.now())
+                .title(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(status).body(errorDescription);
+    }
+
+    @ExceptionHandler(MatterNotFoundException.class)
+    public ResponseEntity<Object> handleMatterNotFound(MatterNotFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        ErrorDescription errorDescription = ErrorDescription
+                .builder()
+                .status(status.value())
+                .time(OffsetDateTime.now())
+                .title(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(status).body(errorDescription);
+    }
 
 }

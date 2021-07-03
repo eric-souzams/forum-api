@@ -15,6 +15,4 @@ public class PersonResponse {
 
     private String email;
 
-    private String password;
-
 }
