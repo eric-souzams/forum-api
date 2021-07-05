@@ -15,6 +15,7 @@ public class TopicAssembler {
 
     private final MatterAssembler matterAssembler;
     private final PersonAssembler personAssembler;
+    private final AnswerAssembler answerAssembler;
 
     public TopicResponse toResponse(Topic topic) {
         return TopicResponse
@@ -27,16 +28,16 @@ public class TopicAssembler {
                 .endedAt(topic.getEndedAt())
                 .matter(matterAssembler.toResponse(topic.getMatter()))
                 .author(personAssembler.entityToResponse(topic.getAuthor()))
-                .answers(topic.getAnswers())
+//                .answers(answerAssembler.toResponseCollection(topic.getAnswers()))
                 .build();
     }
 
     public Topic toEntity(TopicRequest topicRequest) {
-        return Topic
-                .builder()
-                .title(topicRequest.getTitle())
-                .description(topicRequest.getDescription())
-                .build();
+        Topic topic = new Topic();
+        topic.setTitle(topicRequest.getTitle());
+        topic.setDescription(topicRequest.getDescription());
+
+        return topic;
     }
 
     public List<TopicResponse> toResponseCollection(List<Topic> topicList) {

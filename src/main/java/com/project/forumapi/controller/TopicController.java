@@ -1,7 +1,10 @@
 package com.project.forumapi.controller;
 
+import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.request.TopicRequest;
+import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.controller.response.TopicResponse;
+import com.project.forumapi.service.RegisterReplyService;
 import com.project.forumapi.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

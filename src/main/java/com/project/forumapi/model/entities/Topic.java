@@ -1,7 +1,7 @@
 package com.project.forumapi.model.entities;
 
 import com.project.forumapi.model.enums.TopicStatus;
-import lombok.Builder;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Builder
 public class Topic {
 
     @Id
@@ -39,7 +38,16 @@ public class Topic {
     @ManyToOne
     private Person author;
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
+
+    public Answer addAnswer(Answer answer) {
+        answer.setCreatedAt(OffsetDateTime.now());
+        answer.setTopic(this);
+
+        this.getAnswers().add(answer);
+
+        return answer;
+    }
 
 }

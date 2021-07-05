@@ -1,15 +1,12 @@
 package com.project.forumapi.controller.response;
 
-import com.project.forumapi.model.entities.Answer;
-import com.project.forumapi.model.entities.Matter;
-import com.project.forumapi.model.entities.Person;
 import com.project.forumapi.model.enums.TopicStatus;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,6 +30,6 @@ public class TopicResponse {
 
     private PersonResponse author;
 
-    private List<Answer> answers = new ArrayList<>();
+//    private List<AnswerResponse> answers;
 
 }
