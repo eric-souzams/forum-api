@@ -3,6 +3,7 @@ package com.project.forumapi.exceptionhandler;
 import com.project.forumapi.exception.MatterNotFoundException;
 import com.project.forumapi.exception.PersonNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
+import com.project.forumapi.exception.WithoutPermissionException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -76,8 +77,22 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TopicNotFoundException.class)
-    public ResponseEntity<Object> handleMatterNotFound(TopicNotFoundException ex) {
+    public ResponseEntity<Object> handleTopicNotFound(TopicNotFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+
+        ErrorDescription errorDescription = ErrorDescription
+                .builder()
+                .status(status.value())
+                .time(OffsetDateTime.now())
+                .title(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(status).body(errorDescription);
+    }
+
+    @ExceptionHandler(WithoutPermissionException.class)
+    public ResponseEntity<Object> handleWithoutPermission(WithoutPermissionException ex) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
 
         ErrorDescription errorDescription = ErrorDescription
                 .builder()

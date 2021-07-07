@@ -35,4 +35,13 @@ public class TopicController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    @PatchMapping(value = "/{topicId}")
+    public ResponseEntity<TopicResponse> update(@RequestBody @Valid TopicRequest topicRequest,
+                                                @PathVariable(value = "topicId") Long topicId) {
+
+        TopicResponse result = topicService.update(topicRequest, topicId);
+
+        return ResponseEntity.ok(result);
+    }
+
 }

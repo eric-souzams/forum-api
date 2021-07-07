@@ -6,6 +6,8 @@ import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.controller.response.TopicResponse;
 import com.project.forumapi.exception.MatterNotFoundException;
 import com.project.forumapi.exception.PersonNotFoundException;
+import com.project.forumapi.exception.TopicNotFoundException;
+import com.project.forumapi.exception.WithoutPermissionException;
 import com.project.forumapi.model.entities.Matter;
 import com.project.forumapi.model.entities.Person;
 import com.project.forumapi.model.entities.Topic;
@@ -30,19 +32,15 @@ public class TopicService {
     private final PersonRepository personRepository;
     private final MatterRepository matterRepository;
 
+    @Transactional(readOnly = true)
     public List<TopicResponse> findAll() {
         return topicAssembler.toResponseCollection(topicRepository.findAll());
     }
 
     @Transactional
     public TopicResponse create(TopicRequest topicRequest) {
-        Matter matter = matterRepository
-                .findById(topicRequest.getMatterId())
-                .orElseThrow(() -> new MatterNotFoundException("Matter not has found."));
-
-        Person author = personRepository
-                .findById(topicRequest.getAuthorId())
-                .orElseThrow(() -> new PersonNotFoundException("Author not has found."));
+        Matter matter = verifyIfExistMatter(topicRequest.getMatterId());
+        Person author = verifyIfExistAuthor(topicRequest.getAuthorId());
 
         Topic topic = topicAssembler.toEntity(topicRequest);
         topic.setAuthor(author);
@@ -53,6 +51,45 @@ public class TopicService {
         Topic result = topicRepository.save(topic);
 
         return topicAssembler.toResponse(result);
+    }
+
+    @Transactional
+    public TopicResponse update(TopicRequest topicRequest, Long topicId) {
+        Topic topic = verifyIfExistTopic(topicId);
+        verifyIfExistMatter(topicRequest.getMatterId());
+        verifyIfExistAuthor(topicRequest.getAuthorId());
+
+        verifyOwnerOfTopic(topic.getAuthor().getId(), topicRequest.getAuthorId());
+
+        topic.setTitle(topicRequest.getTitle());
+        topic.setDescription(topicRequest.getDescription());
+
+        Topic result = topicRepository.save(topic);
+
+        return topicAssembler.toResponse(result);
+    }
+
+    private void verifyOwnerOfTopic(Long topicAuthor, Long requestAuthor) {
+        if (!topicAuthor.equals(requestAuthor)) {
+            throw new WithoutPermissionException("You don't have permission.");
+        }
+    }
+
+    private Matter verifyIfExistMatter(Long matterId) {
+        return matterRepository
+                .findById(matterId)
+                .orElseThrow(() -> new MatterNotFoundException("Matter not has found."));
+    }
+
+    private Person verifyIfExistAuthor(Long authorId) {
+        return personRepository
+                .findById(authorId)
+                .orElseThrow(() -> new PersonNotFoundException("Author not has found."));
+    }
+
+    private Topic verifyIfExistTopic(Long topicId) {
+        return topicRepository.findById(topicId)
+                .orElseThrow(() -> new TopicNotFoundException("Topic not has found."));
     }
 
 }
