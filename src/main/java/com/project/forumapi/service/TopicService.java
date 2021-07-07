@@ -2,7 +2,6 @@ package com.project.forumapi.service;
 
 import com.project.forumapi.assembler.TopicAssembler;
 import com.project.forumapi.controller.request.TopicRequest;
-import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.controller.response.TopicResponse;
 import com.project.forumapi.exception.MatterNotFoundException;
 import com.project.forumapi.exception.PersonNotFoundException;
@@ -16,7 +15,6 @@ import com.project.forumapi.repository.MatterRepository;
 import com.project.forumapi.repository.PersonRepository;
 import com.project.forumapi.repository.TopicRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +61,7 @@ public class TopicService {
 
         topic.setTitle(topicRequest.getTitle());
         topic.setDescription(topicRequest.getDescription());
+        topic.setLastUpdateAt(OffsetDateTime.now());
 
         Topic result = topicRepository.save(topic);
 

@@ -30,6 +30,8 @@ public class Topic {
 
     private OffsetDateTime createdAt;
 
+    private OffsetDateTime lastUpdateAt;
+
     private OffsetDateTime endedAt;
 
     @ManyToOne

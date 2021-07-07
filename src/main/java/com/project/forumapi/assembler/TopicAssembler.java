@@ -15,7 +15,6 @@ public class TopicAssembler {
 
     private final MatterAssembler matterAssembler;
     private final PersonAssembler personAssembler;
-    private final AnswerAssembler answerAssembler;
 
     public TopicResponse toResponse(Topic topic) {
         return TopicResponse
@@ -25,10 +24,10 @@ public class TopicAssembler {
                 .description(topic.getDescription())
                 .status(topic.getStatus())
                 .createdAt(topic.getCreatedAt())
+                .lastUpdateAt(topic.getLastUpdateAt())
                 .endedAt(topic.getEndedAt())
                 .matter(matterAssembler.toResponse(topic.getMatter()))
                 .author(personAssembler.toResponse(topic.getAuthor()))
-//                .answers(answerAssembler.toResponseCollection(topic.getAnswers()))
                 .build();
     }
 

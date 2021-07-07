@@ -26,11 +26,8 @@ public class RegisterReplyService {
 
     @Transactional
     public AnswerResponse register(Long topicId, AnswerRequest answerRequest) {
-        Topic topic = topicRepository.findById(topicId)
-                .orElseThrow(() -> new TopicNotFoundException("Topic not has found."));
-
-        Person author = personRepository.findById(answerRequest.getAuthorId())
-                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
+        Topic topic = verifyIfTopicExist(topicId);
+        Person author = verifyIfAuthorExist(answerRequest.getAuthorId());
 
         Answer answer = answerAssembler.toEntity(answerRequest);
         answer.setAuthor(author);
@@ -41,10 +38,18 @@ public class RegisterReplyService {
     }
 
     public List<AnswerResponse> getAll(Long topicId) {
-        Topic topic = topicRepository.findById(topicId)
-                .orElseThrow(() -> new TopicNotFoundException("Topic not has found."));
+        Topic topic = verifyIfTopicExist(topicId);
 
         return answerAssembler.toResponseCollection(topic.getAnswers());
     }
 
+    private Topic verifyIfTopicExist(Long topicId) {
+        return topicRepository.findById(topicId)
+                .orElseThrow(() -> new TopicNotFoundException("Topic not has found."));
+    }
+
+    private Person verifyIfAuthorExist(Long authorId) {
+        return personRepository.findById(authorId)
+                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
+    }
 }

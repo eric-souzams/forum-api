@@ -32,10 +32,14 @@ public class PersonService {
 
     @Transactional(readOnly = true)
     public PersonResponse getOne(Long personId) {
-        Person person = personRepository.findById(personId)
-                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
+        Person person = verifyIfAuthorExist(personId);
 
         return personAssembler.toResponse(person);
+    }
+
+    private Person verifyIfAuthorExist(Long personId) {
+        return personRepository.findById(personId)
+                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
     }
 
 }

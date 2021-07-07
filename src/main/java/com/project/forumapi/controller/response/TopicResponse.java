@@ -1,5 +1,6 @@
 package com.project.forumapi.controller.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.forumapi.model.enums.TopicStatus;
 
 import lombok.Builder;
@@ -7,8 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
 @Builder
@@ -24,12 +25,12 @@ public class TopicResponse {
 
     private OffsetDateTime createdAt;
 
+    private OffsetDateTime lastUpdateAt;
+
     private OffsetDateTime endedAt;
 
     private MatterResponse matter;
 
     private PersonResponse author;
-
-//    private List<AnswerResponse> answers;
 
 }
