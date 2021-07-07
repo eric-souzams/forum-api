@@ -26,7 +26,7 @@ public class MatterAssembler {
         return matter;
     }
 
-    public List<MatterResponse> toCollectionResponse(List<Matter> matters) {
+    public List<MatterResponse> toResponseCollection(List<Matter> matters) {
         return matters.stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());

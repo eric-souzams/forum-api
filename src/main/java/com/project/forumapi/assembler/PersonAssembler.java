@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PersonAssembler {
 
-    public Person requestToEntity(PersonRequest personRequest) {
+    public Person toEntity(PersonRequest personRequest) {
         Person person = new Person();
         person.setName(personRequest.getName());
         person.setEmail(personRequest.getEmail());
@@ -17,7 +17,7 @@ public class PersonAssembler {
         return person;
     }
 
-    public PersonResponse entityToResponse(Person person) {
+    public PersonResponse toResponse(Person person) {
         PersonResponse personResponse = new PersonResponse();
         personResponse.setId(person.getId());
         personResponse.setName(person.getName());

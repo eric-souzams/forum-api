@@ -27,7 +27,7 @@ public class TopicAssembler {
                 .createdAt(topic.getCreatedAt())
                 .endedAt(topic.getEndedAt())
                 .matter(matterAssembler.toResponse(topic.getMatter()))
-                .author(personAssembler.entityToResponse(topic.getAuthor()))
+                .author(personAssembler.toResponse(topic.getAuthor()))
 //                .answers(answerAssembler.toResponseCollection(topic.getAnswers()))
                 .build();
     }

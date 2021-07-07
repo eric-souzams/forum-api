@@ -27,7 +27,7 @@ public class AnswerAssembler {
         answerResponse.setId(answer.getId());
         answerResponse.setMessage(answer.getMessage());
         answerResponse.setCreatedAt(answer.getCreatedAt());
-        answerResponse.setAuthor(personAssembler.entityToResponse(answer.getAuthor()));
+        answerResponse.setAuthor(personAssembler.toResponse(answer.getAuthor()));
         answerResponse.setTopicId(answer.getTopic().getId());
 
         return answerResponse;

@@ -19,7 +19,7 @@ public class MatterService {
     private final MatterAssembler matterAssembler;
 
     public List<MatterResponse> findAll() {
-        return matterAssembler.toCollectionResponse(matterRepository.findAll());
+        return matterAssembler.toResponseCollection(matterRepository.findAll());
     }
 
     @Transactional
