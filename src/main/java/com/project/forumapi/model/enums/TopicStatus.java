@@ -5,6 +5,6 @@ public enum TopicStatus {
     SOLVED,
     NOT_SOLVED,
     CLOSED,
-    NOT_ANSWERED;
+    NOT_ANSWERED
 
 }

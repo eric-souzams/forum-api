@@ -1,5 +1,6 @@
 package com.project.forumapi.model.entities;
 
+import com.project.forumapi.exception.TopicCanNotChangeException;
 import com.project.forumapi.model.enums.TopicStatus;
 
 import lombok.Data;
@@ -50,6 +51,37 @@ public class Topic {
         this.getAnswers().add(answer);
 
         return answer;
+    }
+
+    public void closeTopic() {
+        if (!canChangeStatus()) {
+            throw new TopicCanNotChangeException("You can't change a topic status.");
+        }
+
+        setStatus(TopicStatus.CLOSED);
+        setEndedAt(OffsetDateTime.now());
+    }
+
+    public void solveTopic() {
+        if (!canChangeStatus()) {
+            throw new TopicCanNotChangeException("You can't change a topic status.");
+        }
+
+        setStatus(TopicStatus.SOLVED);
+        setEndedAt(OffsetDateTime.now());
+    }
+
+    public void notSolvedTopic() {
+        if (!canChangeStatus()) {
+            throw new TopicCanNotChangeException("You can't change a topic status.");
+        }
+
+        setStatus(TopicStatus.NOT_SOLVED);
+        setEndedAt(OffsetDateTime.now());
+    }
+
+    public boolean canChangeStatus() {
+        return TopicStatus.NOT_ANSWERED.equals(getStatus());
     }
 
 }
