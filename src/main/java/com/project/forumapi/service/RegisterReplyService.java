@@ -5,6 +5,7 @@ import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.exception.PersonNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
+import com.project.forumapi.exception.WithoutPermissionException;
 import com.project.forumapi.model.entities.Answer;
 import com.project.forumapi.model.entities.Person;
 import com.project.forumapi.model.entities.Topic;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,6 +31,8 @@ public class RegisterReplyService {
         Topic topic = verifyIfTopicExist(topicId);
         Person author = verifyIfAuthorExist(answerRequest.getAuthorId());
 
+        verifyIfAlreadyCanReply(topic.getEndedAt());
+
         Answer answer = answerAssembler.toEntity(answerRequest);
         answer.setAuthor(author);
 
@@ -41,6 +45,12 @@ public class RegisterReplyService {
         Topic topic = verifyIfTopicExist(topicId);
 
         return answerAssembler.toResponseCollection(topic.getAnswers());
+    }
+
+    private void verifyIfAlreadyCanReply(OffsetDateTime endedAt) {
+        if (endedAt != null) {
+            throw new WithoutPermissionException("You has not permission to reply.");
+        }
     }
 
     private Topic verifyIfTopicExist(Long topicId) {
