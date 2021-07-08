@@ -18,6 +18,11 @@ This application is an API for a discussion forum on various topics and subjects
 coming soon...
 ```
 
+<p align="center">
+    <img src="./public/1.png" />
+</p>
+
+
 
 ## Technologies
 This project was developed using the following technologies:
