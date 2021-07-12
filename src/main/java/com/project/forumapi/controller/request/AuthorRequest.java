@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @Getter
 @Setter
-public class PersonRequest {
+public class AuthorRequest {
 
     @NotBlank
     @Size(min = 5, max = 100)

@@ -1,9 +1,6 @@
 package com.project.forumapi.exceptionhandler;
 
-import com.project.forumapi.exception.MatterNotFoundException;
-import com.project.forumapi.exception.PersonNotFoundException;
-import com.project.forumapi.exception.TopicNotFoundException;
-import com.project.forumapi.exception.WithoutPermissionException;
+import com.project.forumapi.exception.*;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,7 +20,7 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
@@ -48,8 +45,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(errorDescription);
     }
 
-    @ExceptionHandler(PersonNotFoundException.class)
-    public ResponseEntity<Object> handlePersonNotFound(PersonNotFoundException ex) {
+    @ExceptionHandler(AuthorNotFoundException.class)
+    public ResponseEntity<Object> handleAuthorNotFound(AuthorNotFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
 
         ErrorDescription errorDescription = ErrorDescription
@@ -92,6 +89,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(WithoutPermissionException.class)
     public ResponseEntity<Object> handleWithoutPermission(WithoutPermissionException ex) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+
+        ErrorDescription errorDescription = ErrorDescription
+                .builder()
+                .status(status.value())
+                .time(OffsetDateTime.now())
+                .title(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(status).body(errorDescription);
+    }
+
+    @ExceptionHandler(TopicCanNotChangeException.class)
+    public ResponseEntity<Object> handleTopicCanNotChange(TopicCanNotChangeException ex) {
         HttpStatus status = HttpStatus.FORBIDDEN;
 
         ErrorDescription errorDescription = ErrorDescription

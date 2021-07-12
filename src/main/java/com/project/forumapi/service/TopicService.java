@@ -4,11 +4,11 @@ import com.project.forumapi.assembler.TopicAssembler;
 import com.project.forumapi.controller.request.TopicRequest;
 import com.project.forumapi.controller.response.TopicResponse;
 import com.project.forumapi.exception.MatterNotFoundException;
-import com.project.forumapi.exception.PersonNotFoundException;
+import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
 import com.project.forumapi.exception.WithoutPermissionException;
 import com.project.forumapi.model.entities.Matter;
-import com.project.forumapi.model.entities.Person;
+import com.project.forumapi.model.entities.Author;
 import com.project.forumapi.model.entities.Topic;
 import com.project.forumapi.model.enums.TopicStatus;
 import com.project.forumapi.repository.MatterRepository;
@@ -38,7 +38,7 @@ public class TopicService {
     @Transactional
     public TopicResponse create(TopicRequest topicRequest) {
         Matter matter = verifyIfExistMatter(topicRequest.getMatterId());
-        Person author = verifyIfExistAuthor(topicRequest.getAuthorId());
+        Author author = verifyIfExistAuthor(topicRequest.getAuthorId());
 
         Topic topic = topicAssembler.toEntity(topicRequest);
         topic.setAuthor(author);
@@ -80,10 +80,10 @@ public class TopicService {
                 .orElseThrow(() -> new MatterNotFoundException("Matter not has found."));
     }
 
-    private Person verifyIfExistAuthor(Long authorId) {
+    private Author verifyIfExistAuthor(Long authorId) {
         return personRepository
                 .findById(authorId)
-                .orElseThrow(() -> new PersonNotFoundException("Author not has found."));
+                .orElseThrow(() -> new AuthorNotFoundException("Author not has found."));
     }
 
     private Topic verifyIfExistTopic(Long topicId) {

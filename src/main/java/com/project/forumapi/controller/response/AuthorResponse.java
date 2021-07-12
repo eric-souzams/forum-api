@@ -7,7 +7,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class PersonResponse {
+public class AuthorResponse {
 
     private Long id;
 

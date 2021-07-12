@@ -25,6 +25,6 @@ public class Answer {
     private Topic topic;
 
     @ManyToOne
-    private Person author;
+    private Author author;
 
 }

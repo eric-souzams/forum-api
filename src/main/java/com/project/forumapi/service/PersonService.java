@@ -1,10 +1,10 @@
 package com.project.forumapi.service;
 
-import com.project.forumapi.assembler.PersonAssembler;
-import com.project.forumapi.controller.request.PersonRequest;
-import com.project.forumapi.controller.response.PersonResponse;
-import com.project.forumapi.exception.PersonNotFoundException;
-import com.project.forumapi.model.entities.Person;
+import com.project.forumapi.assembler.AuthorAssembler;
+import com.project.forumapi.controller.request.AuthorRequest;
+import com.project.forumapi.controller.response.AuthorResponse;
+import com.project.forumapi.exception.AuthorNotFoundException;
+import com.project.forumapi.model.entities.Author;
 import com.project.forumapi.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,30 +16,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class PersonService {
 
     private final PersonRepository personRepository;
-    private final PersonAssembler personAssembler;
+    private final AuthorAssembler authorAssembler;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public PersonResponse save(PersonRequest personRequest) {
-        Person person = personAssembler.toEntity(personRequest);
+    public AuthorResponse save(AuthorRequest authorRequest) {
+        Author author = authorAssembler.toEntity(authorRequest);
 
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        author.setPassword(passwordEncoder.encode(author.getPassword()));
 
-        person = personRepository.save(person);
+        author = personRepository.save(author);
 
-        return personAssembler.toResponse(person);
+        return authorAssembler.toResponse(author);
     }
 
     @Transactional(readOnly = true)
-    public PersonResponse getOne(Long personId) {
-        Person person = verifyIfAuthorExist(personId);
+    public AuthorResponse getOne(Long personId) {
+        Author author = verifyIfAuthorExist(personId);
 
-        return personAssembler.toResponse(person);
+        return authorAssembler.toResponse(author);
     }
 
-    private Person verifyIfAuthorExist(Long personId) {
+    private Author verifyIfAuthorExist(Long personId) {
         return personRepository.findById(personId)
-                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
+                .orElseThrow(() -> new AuthorNotFoundException("Person not has found."));
     }
 
 }

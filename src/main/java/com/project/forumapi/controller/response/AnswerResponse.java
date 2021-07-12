@@ -19,6 +19,8 @@ public class AnswerResponse {
 
     private Long topicId;
 
-    private PersonResponse author;
+    private AuthorResponse author;
+
+    private Long likeCount;
 
 }

@@ -31,6 +31,6 @@ public class TopicResponse {
 
     private MatterResponse matter;
 
-    private PersonResponse author;
+    private AuthorResponse author;
 
 }

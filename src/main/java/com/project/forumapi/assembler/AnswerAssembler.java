@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Configuration
 public class AnswerAssembler {
 
-    private final PersonAssembler personAssembler;
+    private final AuthorAssembler authorAssembler;
 
     public Answer toEntity(AnswerRequest answerRequest) {
         Answer answer = new Answer();
@@ -27,7 +27,7 @@ public class AnswerAssembler {
         answerResponse.setId(answer.getId());
         answerResponse.setMessage(answer.getMessage());
         answerResponse.setCreatedAt(answer.getCreatedAt());
-        answerResponse.setAuthor(personAssembler.toResponse(answer.getAuthor()));
+        answerResponse.setAuthor(authorAssembler.toResponse(answer.getAuthor()));
         answerResponse.setTopicId(answer.getTopic().getId());
 
         return answerResponse;

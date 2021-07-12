@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-public class Person {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

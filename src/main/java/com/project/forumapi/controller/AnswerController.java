@@ -2,7 +2,7 @@ package com.project.forumapi.controller;
 
 import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.response.AnswerResponse;
-import com.project.forumapi.service.RegisterReplyService;
+import com.project.forumapi.service.AnswerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,20 +16,20 @@ import java.util.List;
 @RequestMapping(value = "/topics/{topicId}/answers")
 public class AnswerController {
 
-    private final RegisterReplyService registerReplyService;
+    private final AnswerService answerService;
 
     @PostMapping
     public ResponseEntity<AnswerResponse> addAnswer(@PathVariable("topicId") Long topicId,
                                                     @RequestBody @Valid AnswerRequest answerRequest) {
 
-        AnswerResponse result = registerReplyService.register(topicId, answerRequest);
+        AnswerResponse result = answerService.register(topicId, answerRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @GetMapping
     public ResponseEntity<List<AnswerResponse>> getAllAnswers(@PathVariable("topicId") Long topicId) {
-        List<AnswerResponse> result = registerReplyService.getAll(topicId);
+        List<AnswerResponse> result = answerService.getAll(topicId);
 
         return ResponseEntity.ok(result);
     }

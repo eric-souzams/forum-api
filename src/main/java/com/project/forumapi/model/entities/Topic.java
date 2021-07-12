@@ -39,7 +39,7 @@ public class Topic {
     private Matter matter;
 
     @ManyToOne
-    private Person author;
+    private Author author;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();

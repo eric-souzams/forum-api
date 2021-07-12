@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class TopicAssembler {
 
     private final MatterAssembler matterAssembler;
-    private final PersonAssembler personAssembler;
+    private final AuthorAssembler authorAssembler;
 
     public TopicResponse toResponse(Topic topic) {
         return TopicResponse
@@ -27,7 +27,7 @@ public class TopicAssembler {
                 .lastUpdateAt(topic.getLastUpdateAt())
                 .endedAt(topic.getEndedAt())
                 .matter(matterAssembler.toResponse(topic.getMatter()))
-                .author(personAssembler.toResponse(topic.getAuthor()))
+                .author(authorAssembler.toResponse(topic.getAuthor()))
                 .build();
     }
 

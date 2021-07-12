@@ -3,11 +3,11 @@ package com.project.forumapi.service;
 import com.project.forumapi.assembler.AnswerAssembler;
 import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.response.AnswerResponse;
-import com.project.forumapi.exception.PersonNotFoundException;
+import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
 import com.project.forumapi.exception.WithoutPermissionException;
 import com.project.forumapi.model.entities.Answer;
-import com.project.forumapi.model.entities.Person;
+import com.project.forumapi.model.entities.Author;
 import com.project.forumapi.model.entities.Topic;
 import com.project.forumapi.repository.PersonRepository;
 import com.project.forumapi.repository.TopicRepository;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class RegisterReplyService {
+public class AnswerService {
 
     private final TopicRepository topicRepository;
     private final PersonRepository personRepository;
@@ -29,7 +29,7 @@ public class RegisterReplyService {
     @Transactional
     public AnswerResponse register(Long topicId, AnswerRequest answerRequest) {
         Topic topic = verifyIfTopicExist(topicId);
-        Person author = verifyIfAuthorExist(answerRequest.getAuthorId());
+        Author author = verifyIfAuthorExist(answerRequest.getAuthorId());
 
         verifyIfAlreadyCanReply(topic.getEndedAt());
 
@@ -58,8 +58,8 @@ public class RegisterReplyService {
                 .orElseThrow(() -> new TopicNotFoundException("Topic not has found."));
     }
 
-    private Person verifyIfAuthorExist(Long authorId) {
+    private Author verifyIfAuthorExist(Long authorId) {
         return personRepository.findById(authorId)
-                .orElseThrow(() -> new PersonNotFoundException("Person not has found."));
+                .orElseThrow(() -> new AuthorNotFoundException("Person not has found."));
     }
 }
