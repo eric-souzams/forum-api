@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Data
 @Getter
@@ -26,5 +27,12 @@ public class Answer {
 
     @ManyToOne
     private Author author;
+
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    private List<AnswerLike> likes;
+
+    public void addLike(AnswerLike like) {
+        this.getLikes().add(like);
+    }
 
 }

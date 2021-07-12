@@ -29,6 +29,7 @@ public class AnswerAssembler {
         answerResponse.setCreatedAt(answer.getCreatedAt());
         answerResponse.setAuthor(authorAssembler.toResponse(answer.getAuthor()));
         answerResponse.setTopicId(answer.getTopic().getId());
+        answerResponse.setLikeCount((long) answer.getLikes().size());
 
         return answerResponse;
     }

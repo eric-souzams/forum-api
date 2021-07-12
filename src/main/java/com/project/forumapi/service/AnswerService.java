@@ -1,12 +1,14 @@
 package com.project.forumapi.service;
 
 import com.project.forumapi.assembler.AnswerAssembler;
+import com.project.forumapi.controller.request.AnswerLikeRequest;
 import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
 import com.project.forumapi.exception.WithoutPermissionException;
 import com.project.forumapi.model.entities.Answer;
+import com.project.forumapi.model.entities.AnswerLike;
 import com.project.forumapi.model.entities.Author;
 import com.project.forumapi.model.entities.Topic;
 import com.project.forumapi.repository.PersonRepository;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -45,6 +48,33 @@ public class AnswerService {
         Topic topic = verifyIfTopicExist(topicId);
 
         return answerAssembler.toResponseCollection(topic.getAnswers());
+    }
+
+    @Transactional
+    public void addLike(Long topicId, Long answerId, AnswerLikeRequest answerLikeRequest) {
+        Long authorId = answerLikeRequest.getAuthorId();
+
+        Author author = verifyIfAuthorExist(authorId);
+        Topic topic = verifyIfTopicExist(topicId);
+        Answer answer = verifyIfAnswerExist(topic, answerId);
+
+        Optional<AnswerLike> result = answer.getLikes().stream()
+                .filter(answerLike -> answerLike.getAuthor().getId().equals(authorId))
+                .findFirst();
+
+        if (result.isPresent()) {
+            return;
+        }
+
+        AnswerLike like = new AnswerLike();
+        like.setAnswer(answer);
+        like.setAuthor(author);
+
+        answer.addLike(like);
+    }
+
+    private Answer verifyIfAnswerExist(Topic topic, Long answerId) {
+        return topic.getAnswers().get(answerId.intValue() - 1);
     }
 
     private void verifyIfAlreadyCanReply(OffsetDateTime endedAt) {

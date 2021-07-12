@@ -10,3 +10,5 @@ INSERT INTO Topic(title, description, status, created_at, ended_at, matter_id, a
 
 INSERT INTO Answer(created_at, message, author_id, topic_id) VALUES ('2021-04-03T15:41:29.2660705-03:00', 'Acho que não existe uma resposta logica possivel para isso.', 1, 1);
 INSERT INTO Answer(created_at, message, author_id, topic_id) VALUES ('2021-04-03T15:41:29.2660705-03:00', 'Acho que não existe uma resposta logica possivel para isso.', 1, 1);
+
+INSERT INTO Answer_Like(answer_id, author_id) VALUES (1, 1);

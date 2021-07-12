@@ -1,5 +1,6 @@
 package com.project.forumapi.controller;
 
+import com.project.forumapi.controller.request.AnswerLikeRequest;
 import com.project.forumapi.controller.request.AnswerRequest;
 import com.project.forumapi.controller.response.AnswerResponse;
 import com.project.forumapi.service.AnswerService;
@@ -32,6 +33,16 @@ public class AnswerController {
         List<AnswerResponse> result = answerService.getAll(topicId);
 
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(value = "/{answerId}/like")
+    public ResponseEntity<Void> addLike(@PathVariable("topicId") Long topicId,
+                                        @PathVariable("answerId") Long answerId,
+                                        @RequestBody @Valid AnswerLikeRequest answerLikeRequest) {
+
+        answerService.addLike(topicId, answerId, answerLikeRequest);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
