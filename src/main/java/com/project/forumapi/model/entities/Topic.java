@@ -3,7 +3,6 @@ package com.project.forumapi.model.entities;
 import com.project.forumapi.exception.TopicCanNotChangeException;
 import com.project.forumapi.model.enums.TopicStatus;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Getter
 @Setter
 @Entity

@@ -63,6 +63,7 @@ public class AnswerService {
                 .findFirst();
 
         if (result.isPresent()) {
+            answer.removeLike(result.get());
             return;
         }
 
