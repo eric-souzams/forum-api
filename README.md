@@ -14,14 +14,35 @@ This application is an API for a discussion forum on various topics and subjects
 
 
 ## Preview
-```text
-coming soon...
+```
+Matter
+
+GET: http://localhost:8080/matters
+POST: http://localhost:8080/matters
 ```
 
-<p align="center">
-    <img src="./public/1.png" />
-</p>
+```
+Author
 
+GET: http://localhost:8080/author/1
+POST: http://localhost:8080/author
+```
+
+```
+Topic
+
+GET: http://localhost:8080/topics
+POST: http://localhost:8080/topics
+
+PATCH: http://localhost:8080/topics/1
+PATCH: http://localhost:8080/topics/1/close
+PATCH: http://localhost:8080/topics/1/solve
+PATCH: http://localhost:8080/topics/1/not-solve
+
+GET: http://localhost:8080/topics/1/answers
+POST: http://localhost:8080/topics/1/answers
+POST: http://localhost:8080/topics/1/answers/1/like
+```
 
 
 ## Technologies
@@ -29,7 +50,7 @@ This project was developed using the following technologies:
 - [Java](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Security](https://spring.io/projects/spring-security)
-- [Spring Data](https://spring.io/projects/spring-data)
+- [Spring Data JPA](https://spring.io/projects/spring-data)
 - [Lombok](https://projectlombok.org/)
 
 
