@@ -12,14 +12,14 @@ import javax.validation.Valid;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/person")
+@RequestMapping(value = "/author")
 public class AuthorController {
 
     private final PersonService personService;
 
-    @GetMapping(value = "/{personId}")
-    public ResponseEntity<AuthorResponse> getOne(@PathVariable(value = "personId") Long personId) {
-        AuthorResponse result = personService.getOne(personId);
+    @GetMapping(value = "/{authorId}")
+    public ResponseEntity<AuthorResponse> getOne(@PathVariable(value = "authorId") Long authorId) {
+        AuthorResponse result = personService.getOne(authorId);
 
         return ResponseEntity.ok(result);
     }
