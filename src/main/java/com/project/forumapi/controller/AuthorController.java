@@ -1,7 +1,7 @@
 package com.project.forumapi.controller;
 
-import com.project.forumapi.controller.request.AuthorRequest;
-import com.project.forumapi.controller.response.AuthorResponse;
+import com.project.forumapi.model.dto.request.AuthorRequest;
+import com.project.forumapi.model.dto.response.AuthorResponse;
 import com.project.forumapi.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

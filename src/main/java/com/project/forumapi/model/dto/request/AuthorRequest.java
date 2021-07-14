@@ -1,4 +1,4 @@
-package com.project.forumapi.controller.request;
+package com.project.forumapi.model.dto.request;
 
 import lombok.Data;
 import lombok.Getter;

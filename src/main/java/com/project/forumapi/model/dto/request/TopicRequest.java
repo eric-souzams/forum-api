@@ -1,6 +1,5 @@
-package com.project.forumapi.controller.request;
+package com.project.forumapi.model.dto.request;
 
-import com.project.forumapi.model.enums.TopicStatus;
 import lombok.Getter;
 import lombok.Setter;
 

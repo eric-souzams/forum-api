@@ -1,7 +1,7 @@
 package com.project.forumapi.assembler;
 
-import com.project.forumapi.controller.request.AuthorRequest;
-import com.project.forumapi.controller.response.AuthorResponse;
+import com.project.forumapi.model.dto.request.AuthorRequest;
+import com.project.forumapi.model.dto.response.AuthorResponse;
 import com.project.forumapi.model.entities.Author;
 import org.springframework.context.annotation.Configuration;
 

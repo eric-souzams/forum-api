@@ -1,13 +1,10 @@
 package com.project.forumapi.assembler;
 
-import com.project.forumapi.controller.request.TopicRequest;
-import com.project.forumapi.controller.response.TopicResponse;
+import com.project.forumapi.model.dto.request.TopicRequest;
+import com.project.forumapi.model.dto.response.TopicResponse;
 import com.project.forumapi.model.entities.Topic;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Configuration
@@ -37,12 +34,6 @@ public class TopicAssembler {
         topic.setDescription(topicRequest.getDescription());
 
         return topic;
-    }
-
-    public List<TopicResponse> toResponseCollection(List<Topic> topicList) {
-        return topicList.stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
     }
 
 }

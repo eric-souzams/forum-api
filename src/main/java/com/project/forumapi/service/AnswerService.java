@@ -1,9 +1,9 @@
 package com.project.forumapi.service;
 
 import com.project.forumapi.assembler.AnswerAssembler;
-import com.project.forumapi.controller.request.AnswerLikeRequest;
-import com.project.forumapi.controller.request.AnswerRequest;
-import com.project.forumapi.controller.response.AnswerResponse;
+import com.project.forumapi.model.dto.request.AnswerLikeRequest;
+import com.project.forumapi.model.dto.request.AnswerRequest;
+import com.project.forumapi.model.dto.response.AnswerResponse;
 import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
 import com.project.forumapi.exception.WithoutPermissionException;
@@ -29,8 +29,14 @@ public class AnswerService {
     private final PersonRepository personRepository;
     private final AnswerAssembler answerAssembler;
 
+    public List<AnswerResponse> findAll(Long topicId) {
+        Topic topic = verifyIfTopicExist(topicId);
+
+        return answerAssembler.toResponseCollection(topic.getAnswers());
+    }
+
     @Transactional
-    public AnswerResponse register(Long topicId, AnswerRequest answerRequest) {
+    public AnswerResponse addAnswer(Long topicId, AnswerRequest answerRequest) {
         Topic topic = verifyIfTopicExist(topicId);
         Author author = verifyIfAuthorExist(answerRequest.getAuthorId());
 
@@ -42,12 +48,6 @@ public class AnswerService {
         Answer result = topic.addAnswer(answer);
 
         return answerAssembler.toResponse(result);
-    }
-
-    public List<AnswerResponse> getAll(Long topicId) {
-        Topic topic = verifyIfTopicExist(topicId);
-
-        return answerAssembler.toResponseCollection(topic.getAnswers());
     }
 
     @Transactional

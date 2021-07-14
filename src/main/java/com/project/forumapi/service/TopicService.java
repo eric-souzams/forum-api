@@ -1,8 +1,8 @@
 package com.project.forumapi.service;
 
 import com.project.forumapi.assembler.TopicAssembler;
-import com.project.forumapi.controller.request.TopicRequest;
-import com.project.forumapi.controller.response.TopicResponse;
+import com.project.forumapi.model.dto.request.TopicRequest;
+import com.project.forumapi.model.dto.response.TopicResponse;
 import com.project.forumapi.exception.MatterNotFoundException;
 import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.exception.TopicNotFoundException;
@@ -15,11 +15,12 @@ import com.project.forumapi.repository.MatterRepository;
 import com.project.forumapi.repository.PersonRepository;
 import com.project.forumapi.repository.TopicRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -31,8 +32,10 @@ public class TopicService {
     private final MatterRepository matterRepository;
 
     @Transactional(readOnly = true)
-    public List<TopicResponse> findAll() {
-        return topicAssembler.toResponseCollection(topicRepository.findAll());
+    public Page<TopicResponse> findAll(Pageable pageable) {
+        Page<Topic> result = topicRepository.findAll(pageable);
+
+        return result.map(topicAssembler::toResponse);
     }
 
     @Transactional

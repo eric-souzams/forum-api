@@ -1,4 +1,4 @@
-package com.project.forumapi.controller.response;
+package com.project.forumapi.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

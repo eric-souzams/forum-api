@@ -1,8 +1,8 @@
 package com.project.forumapi.controller;
 
-import com.project.forumapi.controller.request.AnswerLikeRequest;
-import com.project.forumapi.controller.request.AnswerRequest;
-import com.project.forumapi.controller.response.AnswerResponse;
+import com.project.forumapi.model.dto.request.AnswerLikeRequest;
+import com.project.forumapi.model.dto.request.AnswerRequest;
+import com.project.forumapi.model.dto.response.AnswerResponse;
 import com.project.forumapi.service.AnswerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,14 +23,14 @@ public class AnswerController {
     public ResponseEntity<AnswerResponse> addAnswer(@PathVariable("topicId") Long topicId,
                                                     @RequestBody @Valid AnswerRequest answerRequest) {
 
-        AnswerResponse result = answerService.register(topicId, answerRequest);
+        AnswerResponse result = answerService.addAnswer(topicId, answerRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @GetMapping
-    public ResponseEntity<List<AnswerResponse>> getAllAnswers(@PathVariable("topicId") Long topicId) {
-        List<AnswerResponse> result = answerService.getAll(topicId);
+    public ResponseEntity<List<AnswerResponse>> findAll(@PathVariable("topicId") Long topicId) {
+        List<AnswerResponse> result = answerService.findAll(topicId);
 
         return ResponseEntity.ok(result);
     }

@@ -1,16 +1,17 @@
 package com.project.forumapi.controller;
 
-import com.project.forumapi.controller.request.TopicRequest;
-import com.project.forumapi.controller.response.TopicResponse;
+import com.project.forumapi.model.dto.request.TopicRequest;
+import com.project.forumapi.model.dto.response.TopicResponse;
 import com.project.forumapi.service.ChangeTopicStatusService;
 import com.project.forumapi.service.TopicService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -21,8 +22,8 @@ public class TopicController {
     private final ChangeTopicStatusService changeTopicStatusService;
 
     @GetMapping
-    public ResponseEntity<List<TopicResponse>> findAll() {
-        List<TopicResponse> result = topicService.findAll();
+    public ResponseEntity<Page<TopicResponse>> findAll(Pageable pageable) {
+        Page<TopicResponse> result = topicService.findAll(pageable);
 
         return ResponseEntity.ok(result);
     }

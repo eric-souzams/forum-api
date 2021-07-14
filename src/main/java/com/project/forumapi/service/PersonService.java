@@ -1,8 +1,8 @@
 package com.project.forumapi.service;
 
 import com.project.forumapi.assembler.AuthorAssembler;
-import com.project.forumapi.controller.request.AuthorRequest;
-import com.project.forumapi.controller.response.AuthorResponse;
+import com.project.forumapi.model.dto.request.AuthorRequest;
+import com.project.forumapi.model.dto.response.AuthorResponse;
 import com.project.forumapi.exception.AuthorNotFoundException;
 import com.project.forumapi.model.entities.Author;
 import com.project.forumapi.repository.PersonRepository;

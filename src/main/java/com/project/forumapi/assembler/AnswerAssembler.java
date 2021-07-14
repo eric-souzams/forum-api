@@ -1,7 +1,7 @@
 package com.project.forumapi.assembler;
 
-import com.project.forumapi.controller.request.AnswerRequest;
-import com.project.forumapi.controller.response.AnswerResponse;
+import com.project.forumapi.model.dto.request.AnswerRequest;
+import com.project.forumapi.model.dto.response.AnswerResponse;
 import com.project.forumapi.model.entities.Answer;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
