@@ -24,7 +24,7 @@ POST: http://localhost:8080/matters
 ```
 Author
 
-GET: http://localhost:8080/author/1
+GET: http://localhost:8080/author/{authorId}
 POST: http://localhost:8080/author
 ```
 
@@ -34,14 +34,14 @@ Topic
 GET: http://localhost:8080/topics
 POST: http://localhost:8080/topics
 
-PATCH: http://localhost:8080/topics/1
-PATCH: http://localhost:8080/topics/1/close
-PATCH: http://localhost:8080/topics/1/solve
-PATCH: http://localhost:8080/topics/1/not-solve
+PATCH: http://localhost:8080/topics/{topicId}
+PATCH: http://localhost:8080/topics/{topicId}/close
+PATCH: http://localhost:8080/topics/{topicId}/solve
+PATCH: http://localhost:8080/topics/{topicId}/not-solve
 
-GET: http://localhost:8080/topics/1/answers
-POST: http://localhost:8080/topics/1/answers
-POST: http://localhost:8080/topics/1/answers/1/like
+GET: http://localhost:8080/topics/{topicId}/answers
+POST: http://localhost:8080/topics/{topicId}/answers
+POST: http://localhost:8080/topics/{topicId}/answers/{answerId}/like
 ```
 
 
